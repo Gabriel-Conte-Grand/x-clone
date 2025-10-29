@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🐦 X-Clone
 
-## Getting Started
+A lightweight Twitter-style clone built with **Next.js 16**, **TypeScript**, and **Supabase**.  
+Users can authenticate with GitHub, create posts with text or optional images, and comment on other users' posts.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 📘 Overview
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This project implements a simplified social feed where:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Users can **sign in/out** using **GitHub OAuth** via Supabase Auth.
+- Authenticated users can **create posts** (text or images). (Images not supported yet!)
+- Anyone (even unauthenticated users) can **view posts and comments**.
+- Authenticated users can **reply** to posts (one-level comments).
+- The UI is responsive and designed with **TailwindCSS**.
+- Reusable components are used for both **posts and replies**.
+- Performance boost with Server Components inside Client Components
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🧱 Architecture
 
-To learn more about Next.js, take a look at the following resources:
+### Frontend
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Next.js 16** (App Router)
+- **TypeScript**
+- **TailwindCSS 4**
+- **React Server Components** + **Client Components**
+  - Server components handle Supabase server calls for optimized performance.
+  - Client components handle user interaction (post creation, comment toggling, etc.).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Backend
 
-## Deploy on Vercel
+- **Supabase** (PostgreSQL)
+  - `auth.users`: managed by Supabase Auth.
+  - `public.users`: stores public user info (name, username, avatar).
+  - `public.posts`: stores posts and replies.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![Database Schema](./public/database-schema.png)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🗄️ Database Design
+
+| Table            | Description                                                                              |
+| ---------------- | ---------------------------------------------------------------------------------------- |
+| **auth.users**   | Supabase-managed table for authentication (GitHub login).                                |
+| **public.users** | Public user data cloned from `auth.users` via a trigger function.                        |
+| **posts**        | Stores user posts and replies. Replies are limited to one level (no replies to replies). |
+
+### Trigger Function
+
+A PostgreSQL trigger automatically inserts a row in `public.users` after a new user is created in `auth.users`.
+
+| Command             | Description                                     |
+| ------------------- | ----------------------------------------------- |
+| `npm run dev`       | Starts the dev server                           |
+| `npm run build`     | Builds for production                           |
+| `npm run start`     | Starts the production server                    |
+| `npm run lint`      | Runs ESLint                                     |
+| `npm run gen:types` | Generates TypeScript types from Supabase schema |
