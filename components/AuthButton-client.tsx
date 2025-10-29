@@ -17,7 +17,7 @@ export const AuthButton = ({ session }: Props) => {
   const handleSignIn = async () => {
     const redirectUrl =
       process.env.NODE_ENV === "production"
-        ? "https://x-clone.vercel.app/auth/callback"
+        ? "x-clone-rho-olive.vercel.app/auth/callback"
         : "http://localhost:3000/auth/callback"
 
     await supabase.auth.signInWithOAuth({
