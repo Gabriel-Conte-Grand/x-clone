@@ -5,6 +5,8 @@ import { getPosts } from "./actions/getPosts"
 import { createClient } from "@/utils/supabase/server"
 import { AddPost } from "@/components/AddPost"
 
+export const dynamic = "force-dynamic"
+
 const HomePage = async () => {
   const posts = await getPosts()
 
