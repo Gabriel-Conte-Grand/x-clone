@@ -26,6 +26,7 @@ export const AuthButton = ({ session }: Props) => {
         redirectTo: redirectUrl,
       },
     })
+    router.push("/")
   }
 
   const handleSignOut = async () => {
