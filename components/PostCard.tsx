@@ -4,6 +4,7 @@ import React, { useState } from "react"
 import { CommentsList } from "./CommentsList"
 import { NewPostForm } from "./NewPostForm"
 import { getPostReplies } from "@/app/actions/getPostReplies"
+import Image from "next/image"
 
 type Props = {
   post: PostWithUser
@@ -50,10 +51,10 @@ export const PostCard = ({
       >
         {/* Avatar */}
         {user_data?.avatar_url ? (
-          <img
+          <Image
             width={44}
             height={44}
-            src={user_data?.avatar_url || "/public/default-avatar.png"}
+            src={user_data?.avatar_url || "/default-avatar.png"}
             alt={user_data?.name || "User Avatar"}
             className="w-11 h-11 rounded-full object-cover"
           />

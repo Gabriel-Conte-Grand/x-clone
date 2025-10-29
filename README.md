@@ -16,6 +16,7 @@ This project implements a simplified social feed where:
 - The UI is responsive and designed with **TailwindCSS**.
 - Reusable components are used for both **posts and replies**.
 - Performance boost with Server Components inside Client Components
+- Server Actions managing database interaction
 
 ---
 
