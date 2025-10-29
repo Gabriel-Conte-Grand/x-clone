@@ -10,5 +10,6 @@ export async function GET(request: NextRequest) {
     await supabase.auth.exchangeCodeForSession(code)
   }
 
-  return NextResponse.redirect(new URL("/", origin))
+  const redirectUrl = new URL("/auth/loading", request.url)
+  return NextResponse.redirect(redirectUrl)
 }
