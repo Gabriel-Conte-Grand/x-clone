@@ -54,7 +54,7 @@ export const PostCard = ({
           <Image
             width={44}
             height={44}
-            src={user_data?.avatar_url || "/default-avatar.png"}
+            src={user_data?.avatar_url}
             alt={user_data?.name || "User Avatar"}
             className="w-11 h-11 rounded-full object-cover"
           />
