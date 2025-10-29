@@ -21,7 +21,7 @@ const HomePage = async () => {
           <PostsList posts={posts} isLoggedIn={!!user} />
         ) : null}
       </div>
-      <AddPost />
+      {user ? <AddPost /> : null}
     </div>
   )
 }
