@@ -15,10 +15,15 @@ export const AuthButton = ({ session }: Props) => {
   const router = useRouter()
 
   const handleSignIn = async () => {
+    const redirectUrl =
+      process.env.NODE_ENV === "production"
+        ? "https://x-clone.vercel.app/auth/callback"
+        : "http://localhost:3000/auth/callback"
+
     await supabase.auth.signInWithOAuth({
       provider: "github",
       options: {
-        redirectTo: "http://localhost:3000/auth/callback",
+        redirectTo: redirectUrl,
       },
     })
   }
