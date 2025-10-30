@@ -11,5 +11,8 @@ export async function GET(request: NextRequest) {
   }
 
   const redirectUrl = new URL("/auth/loading", request.url)
-  return NextResponse.redirect(redirectUrl)
+
+  setTimeout(() => {
+    return NextResponse.redirect(redirectUrl)
+  }, 1500)
 }
