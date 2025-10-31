@@ -4,9 +4,10 @@ import { PostContent } from "./PostContent"
 
 type Props = {
   replies: PostWithUser[]
+  mainUserName: string
 }
 
-export const CommentsList = ({ replies }: Props) => {
+export const CommentsList = ({ replies, mainUserName }: Props) => {
   return (
     <div className="w-full mx-auto">
       {replies.map((reply) => (
@@ -18,7 +19,7 @@ export const CommentsList = ({ replies }: Props) => {
             name={reply.user_data.name}
             user_name={reply.user_data.user_name}
             isReply={true} //!!
-            userTag={reply.user_data.user_name}
+            userTag={mainUserName}
           />
         </PostCard>
       ))}

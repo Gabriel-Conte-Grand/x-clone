@@ -106,7 +106,9 @@ export const PostCard = ({
           onPostCreated={refreshReplies}
         />
       )}
-      {showReplies && <CommentsList replies={replies} />}
+      {showReplies && (
+        <CommentsList mainUserName={user_data.user_name} replies={replies} />
+      )}
     </div>
   )
 }
